@@ -1,29 +1,65 @@
 import java.util.Scanner;
 
+/**
+ * This class represents entity
+ *
+ * @author Zhao Zhang
+ */
 class Entity {
     Scanner scanner = new Scanner(System.in);
+    /**player health*/
     private int playerHealth;
+    /**player max health*/
     private int maxHp;
+    /**player healed health*/
     private int addedHp;
+    /**player attack dmg*/
     private int playerAttack;
+    /**player defense*/
     private int playerDefense;
+    /**player original defense*/
     private int originalDefense;
+    /**player added defense*/
     private int addedDefense;
+    /**player weapon damage*/
     private int playerWepDmg;
+    /**enemy health*/
     private int enemyHealth;
+    /**enemy max health*/
     private int eMaxHp;
+    /**enemy healed health*/
     private int eHealed;
+    /**enemy attack damage*/
     private int enemyAttack;
+    /**enemy dealt dmg*/
     private int eADmg;
+    /**enemy defense*/
     private int enemyDefense;
+    /**enemy defense*/
     private int eDefend;
+    /**game difficulty*/
     private int difficulty;
+    /**player skill points*/
     private int sp;
+    /**how much points is awarded to the player*/
     private int rewardSp;
+    /**effectiveness of enemy and player moves*/
     private int effectiveness;
+    /**player turn (true/false)*/
     private boolean pTurn;
+    /**boss is dead (true/false)*/
     private boolean bossDead;
     // PLAYER
+    /**
+     * Instantiates a Entity object.
+     *
+     * @param playerHealth the playerHealth
+     * @param playerAttack the playerAttack
+     * @param playerDefense the playerDefense
+     * @param playerWepDmg the playerWepDmg
+     * @param difficulty the difficulty
+     * @param sp the sp
+     */
     public Entity(int playerHealth, int playerAttack, int playerDefense, int playerWepDmg, int difficulty, int sp) {
         this.playerHealth = playerHealth + 1;
         this.playerAttack = playerAttack + 1;
@@ -33,39 +69,75 @@ class Entity {
         this.sp = sp;
     }
 
+    /**
+     * Void method that sets the playerHealth to moreHealth+playerHealth
+     * @param moreHealth
+     */
     public void setHealth(int moreHealth) {
         this.playerHealth += moreHealth;
     }
 
+    /**
+     * int method that return the playerHealth
+     * @return
+     */
     public int getHealth(){
         return playerHealth;
     }
 
+    /**
+     * void method that sets the playerAttack to moreAttack+playerAttack
+     * @param moreAttack
+     */
     public void setAttack(int moreAttack) {
         this.playerAttack += moreAttack;
     }
 
+    /**
+     * int method that returns playerAttack
+     * @return
+     */
     public int getAttack(){
         return playerAttack;
     }
 
+    /**
+     * void method that sets playerDefense to playerDefense+moreDefense
+     * @param moreDefense
+     */
     public void setDefense(int moreDefense) {
         this.playerDefense += moreDefense;
     }
 
+    /**
+     * int method that return playerDefense
+     * @return
+     */
     public int getDefense(){
         return playerDefense;
     }
 
+    /**
+     * void method that sets playerWepDmg to playerWepDmg+moreWepDmg
+     * @param moreWepDmg
+     */
     public void setWepDmg(int moreWepDmg) {
         this.playerWepDmg += moreWepDmg;
     }
 
+    /**
+     * int method that returns the effectiveness of attack1
+     * @return
+     */
     public int attack1() {
         effectiveness = (int) (Math.random() * 10 + 1);
         return (int) (playerWepDmg * (playerAttack / effectiveness));
     }
 
+    /**
+     * int method that returns effectiveness of defend1
+     * @return
+     */
     public int defend1() {
         originalDefense = playerDefense;
         effectiveness = (int) (Math.random() * playerDefense + (int) (0.25 * playerDefense));
@@ -73,6 +145,10 @@ class Entity {
         return effectiveness;
     }
 
+    /**
+     * int method that returns the new hp
+     * @return
+     */
     public int heal1() {
         addedHp = (int) (Math.random() * (maxHp / 4) + 1);
         if (addedHp + playerHealth > maxHp) {
@@ -82,13 +158,26 @@ class Entity {
         }
     }
 
+    /**
+     * void method that prints all of the player's stats
+     */
     public void getPlayerStat() {
         System.out.println("\nHealth: " + playerHealth + "\nStrength: " + playerAttack + "\nDefense: " + playerDefense
                 + "\nWeapon Damage: " + playerWepDmg);
     }
+
+    /**
+     * void method that sets the pTurn boolean
+     * @param pTurn
+     */
     public void setPTurn(boolean pTurn){
         this.pTurn = pTurn;
     }
+
+    /**
+     * boolean method that returns pTurn
+     * @return
+     */
     public boolean getPTurn(){
         return pTurn;
     }
@@ -96,6 +185,10 @@ class Entity {
     // ENEMY
     // difficulty1 = 7, 2 = 9, 3 = 12
     // hp enemy
+
+    /**
+     * void method that sets enemy1 stats
+     */
     public void setEnemy1Stats() {
         if (difficulty == 1) {
             enemyHealth = 4;
@@ -113,6 +206,10 @@ class Entity {
     }
 
     // defense enemy
+
+    /**
+     * void method that sets enemy2 stats
+     */
     public void setEnemy2Stats() {
         if (difficulty == 1) {
             enemyHealth = 2;
@@ -130,6 +227,10 @@ class Entity {
     }
 
     // attack enemy
+
+    /**
+     * void method that sets enemy3 stats
+     */
     public void setEnemy3Stats() {
         if (difficulty == 1) {
             enemyHealth = 3;
@@ -146,46 +247,86 @@ class Entity {
         }
     }
 
+    /**
+     * void method that adds moreHealth to enemyHealth
+     * @param moreHealth
+     */
+
     public void setEHealth(int moreHealth) {
         this.enemyHealth += moreHealth;
     }
 
+    /**
+     * int method that returns enemyHealth
+     * @return
+     */
     public int getEHealth(){
         return enemyHealth;
     }
 
+    /**
+     * void method that adds moreAttack to enemyAttack
+     * @param moreAttack
+     */
     public void setEAttack(int moreAttack) {
         this.enemyAttack += moreAttack;
     }
 
+    /**
+     * int method that returns enemyAttack
+     * @return
+     */
     public int getEAttack(){
         return enemyAttack;
     }
 
+    /**
+     * void method that adds moreDefense to enemyDefense
+     * @param moreDefense
+     */
     public void setEDefense(int moreDefense) {
         this.enemyDefense += moreDefense;
     }
 
+    /**
+     * int method that returns enemyDefense
+     * @return
+     */
     public int getEDefense(){
         return enemyDefense;
     }
 
+    /**
+     * int method that returns eAdmg after calculations
+     * @return
+     */
     public int enemyAttack1() {
         effectiveness = (int) (Math.random() * 10 + 1);
         eADmg = (int) ((enemyAttack / effectiveness) - playerDefense);
         return eADmg;
     }
 
+    /**
+     * int method that return eDefend after calculations
+     * @return
+     */
     public int enemyDefend1() {
         eDefend = (int) (Math.random() * enemyDefense + (int) (0.25 * enemyDefense));
         return eDefend;
     }
 
+    /**
+     * int method that returns amount of health healed by enemy
+     * @return
+     */
     public int enemyHeal1() {
-        eHealed = (int) (Math.random() * 5 + 1);
-        return effectiveness;
+        eHealed = (int) (Math.random() * (eMaxHp/5) + 1);
+        return eHealed;
     }
 
+    /**
+     * void method that returns all of the enemy's stats
+     */
     public void getEnemyStats() {
         System.out.println("\nEnemy Health: " + enemyHealth + "\nEnemy Strength: " + enemyAttack + "\nEnemy Defense: " + enemyDefense);
     }
@@ -198,6 +339,10 @@ class Entity {
     // distribution, turns, scale the enemies with the player and the player's sp
     int enemyX;
 
+    /**
+     * returns a random number 1-4 inclusive representing 4 different enemies
+     * @return
+     */
     public int encounterEnemy() {
         enemyX = (int) (Math.random() * 5 + 1);
         if (enemyX == 1) {
@@ -213,6 +358,10 @@ class Entity {
             return 4;
         }
     }
+
+    /**
+     * void method that sets the enemy's stats based on enemyX
+     */
     public void enemyInitiate(){
         if (enemyX == 1) {
             // System.out.println("You encountered Bob the healthy slime!");
@@ -230,6 +379,10 @@ class Entity {
 
     int choice;
     int choice2;
+
+    /**
+     * void method that asks for and responds to the client with moves
+     */
 
     public void playerTurn() {
         System.out.println("\n!-----What would you like to do?------!");
@@ -264,6 +417,10 @@ class Entity {
         }
     }
 
+    /**
+     * void method that print out moves that enemy does
+     */
+
     public void enemyTurn() {
         if (!(pTurn)) {
             enemyX = (int) (Math.random() * 3);
@@ -295,6 +452,10 @@ class Entity {
     String stats;
     int inputedSp;
 
+    /**
+     * void method that allows the player to distribute their stats
+     */
+
     public void distributeStats() {
         rewardSp = (int) (Math.random() * (sp / 5) + 1);
         System.out.println("\n!--------- CHOOSE YOUR STATS ---------!");
@@ -322,6 +483,13 @@ class Entity {
         playerWepDmg += Integer.parseInt(stats.substring(11, 12));
     }
 
+    /**
+     * void method that sets the enemy stats to scale with the player
+     * @param hp
+     * @param str
+     * @param def
+     * @param sp
+     */
     public void setEstats(int hp, int str, int def, int sp) {
         if (sp > 20) {
             enemyHealth *= (int) (sp * .5);
@@ -329,6 +497,10 @@ class Entity {
             enemyDefense *= (int) (sp * .5);
         }
     }
+
+    /**
+     * void method that initializes the stats of the boss
+     */
 
     public void initiateBoss() {
         if (enemyX == 4) {
@@ -340,6 +512,9 @@ class Entity {
         }
     }
 
+    /**
+     * void method that prints the moves of the boss
+     */
     public void bossTurn() {
         enemyX = (int) (Math.random() * 3);
         if (getEHealth()<0){
